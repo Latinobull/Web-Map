@@ -6,7 +6,6 @@ lon = list(data["LON"])
 lat = list(data["LAT"])
 name = list(data["NAME"])
 elev = list(data["ELEV"])
-
 map = folium.Map(
     location=[37.97257545638386, -98.89051431454878],
     zoom_start=5,
