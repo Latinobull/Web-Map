@@ -5,11 +5,14 @@ map = folium.Map(
     zoom_start=6,
     tiles="OpenStreetMap",
 )
-map.add_child(
+fg = folium.FeatureGroup(name="My Map")
+fg.add_child(
     folium.Marker(
         location=[40.64748489005272, -73.88336934270934],
         popup="Hi I am a Marker",
         icon=folium.Icon(color="red"),
     )
 )
+
+map.add_child(fg)
 map.save("Map1.html")
