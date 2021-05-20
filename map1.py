@@ -1,4 +1,9 @@
 import folium
+import pandas as pd
+
+data = pd.read_csv("Volcanoes.txt")
+lon = list(data["LON"])
+lat = list(data["LAT"])
 
 map = folium.Map(
     location=[40.639050998016664, -73.92169274478333],
@@ -6,14 +11,11 @@ map = folium.Map(
     tiles="OpenStreetMap",
 )
 fg = folium.FeatureGroup(name="My Map")
-for coords in [
-    [40.64748489005272, -73.88336934270934],
-    [40.60204651406353, -73.96563805750966],
-]:
+for lt, ln in zip(lat, lon):
 
     fg.add_child(
         folium.Marker(
-            location=coords,
+            location=[lt, ln],
             popup="Hi I am a Marker",
             icon=folium.Icon(color="red"),
         )
