@@ -6,6 +6,12 @@ lon = list(data["LON"])
 lat = list(data["LAT"])
 name = list(data["NAME"])
 elev = list(data["ELEV"])
+
+html = """
+Volcano name:<br>
+<a href="https://www.google.com/search?q=%%22%s%%22" target="_blank">%s</a><br>
+Height: %s m
+"""
 map = folium.Map(
     location=[37.97257545638386, -98.89051431454878],
     zoom_start=5,
@@ -13,11 +19,11 @@ map = folium.Map(
 )
 fg = folium.FeatureGroup(name="My Map")
 for lt, ln, nm, el in zip(lat, lon, name, elev):
-
+    iframe = folium.IFrame(html=html % (nm, nm, el), width=200, height=100)
     fg.add_child(
         folium.Marker(
             location=[lt, ln],
-            popup="Volcano {}: Elevation: {}m".format(nm, el),
+            popup=folium.Popup(iframe),
             icon=folium.Icon(color="red"),
         )
     )
