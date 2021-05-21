@@ -15,7 +15,7 @@ Height: %s m
 map = folium.Map(
     location=[37.97257545638386, -98.89051431454878],
     zoom_start=5,
-    tiles="OpenStreetMap",
+    tiles="Stamen Terrain",
 )
 
 fg_volcanoes = folium.FeatureGroup(name="Volcanoes in America")
