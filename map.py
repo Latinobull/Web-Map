@@ -18,7 +18,8 @@ map = folium.Map(
     tiles="OpenStreetMap",
 )
 
-fg = folium.FeatureGroup(name="My Map")
+fg_volcanoes = folium.FeatureGroup(name="Volcanoes in America")
+fg_population = folium.FeatureGroup(name="World Population")
 for lt, ln, nm, el in zip(lat, lon, name, elev):
     iframe = folium.IFrame(html=html % (nm, nm, el), width=200, height=100)
     new_color = ""
@@ -28,7 +29,7 @@ for lt, ln, nm, el in zip(lat, lon, name, elev):
         new_color = "orange"
     else:
         new_color = "red"
-    fg.add_child(
+    fg_volcanoes.add_child(
         folium.CircleMarker(
             location=[lt, ln],
             radius=9,
@@ -39,7 +40,7 @@ for lt, ln, nm, el in zip(lat, lon, name, elev):
         )
     )
 
-fg.add_child(
+fg_population.add_child(
     folium.GeoJson(
         data=open("world.json", "r", encoding="utf-8-sig").read(),
         style_function=lambda x: {
@@ -51,5 +52,9 @@ fg.add_child(
         },
     )
 )
-map.add_child(fg)
+
+
+map.add_child(fg_population)
+map.add_child(fg_volcanoes)
+map.add_child(folium.LayerControl())
 map.save("Map1.html")
