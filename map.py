@@ -21,18 +21,21 @@ map = folium.Map(
 fg = folium.FeatureGroup(name="My Map")
 for lt, ln, nm, el in zip(lat, lon, name, elev):
     iframe = folium.IFrame(html=html % (nm, nm, el), width=200, height=100)
-    color = ""
+    new_color = ""
     if el < 1000:
-        color = "green"
+        new_color = "green"
     elif 1000 <= el < 3000:
-        color = "orange"
+        new_color = "orange"
     else:
-        color = "red"
+        new_color = "red"
     fg.add_child(
-        folium.Marker(
+        folium.CircleMarker(
             location=[lt, ln],
+            radius=6,
             popup=folium.Popup(iframe),
-            icon=folium.Icon(color=color),
+            fill_color=new_color,
+            color="gray",
+            fill_opacity=0.7,
         )
     )
 
