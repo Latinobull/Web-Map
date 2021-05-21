@@ -31,11 +31,11 @@ for lt, ln, nm, el in zip(lat, lon, name, elev):
     fg.add_child(
         folium.CircleMarker(
             location=[lt, ln],
-            radius=6,
+            radius=9,
             popup=folium.Popup(iframe),
             fill_color=new_color,
-            color="gray",
-            fill_opacity=0.7,
+            color="black",
+            fill_opacity=1,
         )
     )
 
