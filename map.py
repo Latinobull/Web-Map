@@ -17,14 +17,22 @@ map = folium.Map(
     zoom_start=5,
     tiles="OpenStreetMap",
 )
+
 fg = folium.FeatureGroup(name="My Map")
 for lt, ln, nm, el in zip(lat, lon, name, elev):
     iframe = folium.IFrame(html=html % (nm, nm, el), width=200, height=100)
+    color = ""
+    if el < 1000:
+        color = "green"
+    elif 1000 <= el < 3000:
+        color = "orange"
+    else:
+        color = "red"
     fg.add_child(
         folium.Marker(
             location=[lt, ln],
             popup=folium.Popup(iframe),
-            icon=folium.Icon(color="red"),
+            icon=folium.Icon(color=color),
         )
     )
 
